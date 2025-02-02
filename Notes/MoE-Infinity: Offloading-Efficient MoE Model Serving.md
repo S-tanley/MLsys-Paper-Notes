@@ -4,8 +4,6 @@
 
 **Abstract**:
 
-Confused about one important concept, mixture-of-experts (MoE) models and sparse mixture-of-experts (MoE) models.
-
 Watched a video[^2], MoE itself is a sparse model, which means only parts of the model are involved in the calculation each time. This leads to higher efficiency.
 
 Mainly about efficiency, cost, and latency. The MoE-Infinity is more efficient, cheaper, and has lower latency.
