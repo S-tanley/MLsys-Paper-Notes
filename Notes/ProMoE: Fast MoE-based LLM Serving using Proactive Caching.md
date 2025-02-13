@@ -26,7 +26,7 @@ coordinate the execution of prefetching and inference processes to avoid them in
 
 **2. Background**:
 
-![CleanShot 2025-01-27 at 19.27.35](/Users/zhengbowen/Library/Mobile Documents/com~apple~CloudDocs/Paper library/System/Group for Wang/Notes/${img}/CleanShot 2025-01-27 at 19.27.35.png)
+![CleanShot 2025-01-27 at 19.27.35](./${img}/CleanShot 2025-01-27 at 19.27.35.png)
 
 LLM perform inference in two stages: profile and decode.
 
@@ -37,7 +37,7 @@ LLM perform inference in two stages: profile and decode.
 
 **3. Overview of ProMoE**
 
-<img src="/Users/zhengbowen/Library/Mobile Documents/com~apple~CloudDocs/Paper library/System/Group for Wang/Notes/${img}/CleanShot 2025-01-27 at 19.57.35.png" alt="CleanShot 2025-01-27 at 19.57.35" style="zoom:60%;" />
+<img src="./${img}/CleanShot 2025-01-27 at 19.57.35.png" alt="CleanShot 2025-01-27 at 19.57.35" style="zoom:60%;" />
 
 ProMoE introduces a
 
@@ -55,13 +55,13 @@ New metric，GOODPRED，就是accuracy和fetchrate相乘。
 
 using input token id to predict the experts used
 
-<img src="/Users/zhengbowen/Library/Mobile Documents/com~apple~CloudDocs/Paper library/System/Group for Wang/Notes/${img}/CleanShot 2025-01-27 at 20.35.49.png" alt="CleanShot 2025-01-27 at 20.35.49" style="zoom:60%;" />
+<img src="./${img}/CleanShot 2025-01-27 at 20.35.49.png" alt="CleanShot 2025-01-27 at 20.35.49" style="zoom:60%;" />
 
 Iteration-wise（token- based），一次iteration把layer的experts都预测了，时间留的很足，但是accuracy低；layer-wise（skip-based），用这一层预测下一层，很准，但是留的时间太少了。自然想到跨很多层，但是问题是他是直接把i- layer的输入，直接给i+k-layer的gate，看看什么experts会被activate。跨太多input会变很多，就很不准了。作者就是基于这个sliding-window的方法，记录历史数据，然后训练一个小的neural network去predict。
 
 **5. Coordination of Prefetching and Inference**：
 
-<img src="/Users/zhengbowen/Library/Mobile Documents/com~apple~CloudDocs/Paper library/System/Group for Wang/Notes/${img}/CleanShot 2025-01-27 at 21.48.07.png" alt="CleanShot 2025-01-27 at 21.48.07" style="zoom:60%;" />
+<img src="./${img}/CleanShot 2025-01-27 at 21.48.07.png" alt="CleanShot 2025-01-27 at 21.48.07" style="zoom:60%;" />
 
 **Chunked Prefetch**：The key idea is to split the parameters of each expert
 
@@ -79,7 +79,7 @@ into multiple chunks.
 
 消融实验
 
-<img src="/Users/zhengbowen/Library/Mobile Documents/com~apple~CloudDocs/Paper library/System/Group for Wang/Notes/${img}/CleanShot 2025-01-28 at 18.05.56.png" alt="CleanShot 2025-01-28 at 18.05.56" style="zoom:60%;" />
+<img src="./${img}/CleanShot 2025-01-28 at 18.05.56.png" alt="CleanShot 2025-01-28 at 18.05.56" style="zoom:60%;" />
 
 这个就很清晰了，就一个一个trick往上加。
 
